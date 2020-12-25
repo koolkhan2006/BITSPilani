@@ -3,44 +3,44 @@
 Total no. of freight trains:6
 Total no. of cities:8
 List of Freight trains:
-T2342
+T2341
 T1122
 T5623
 T1235
-T2341
+T2342
 T5768
 
 List of cities:
+New Delhi
 Hyderabad
 Nagpur
 Ahmedabad
-Mumbai
+Chennai
 Vishakhapatnam
 Calcutta
-New Delhi
-Chennai
+Mumbai
 -----------------------------------------
 
 --------Function displayTransportHub --------
 Main transport hub:New Delhi
 Number of trains visited:4
 List of Freight trains:
+T1235
 T2342
 T1122
 T2341
-T1235
 -----------------------------------------
 
 --------Function displayConnectedCities --------
 Freight train number:T1122
 Number of cities connected:6
 List of cities connected directly by T1122:
+New Delhi
 Nagpur
 Ahmedabad
-Mumbai
-Calcutta
-New Delhi
 Chennai
+Calcutta
+Mumbai
 -----------------------------------------
 
 --------Function displayConnectedCities --------
