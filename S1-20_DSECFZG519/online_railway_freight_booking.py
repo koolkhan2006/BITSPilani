@@ -230,25 +230,34 @@ class OnlineRailwayFreightBooking:
         f.write("\n")
         f.close()
 
-    def search(self, edges, initial, final, steps):
+    def fetchListconnectedCities(self, city):
+        connectedcities = []
+        for i in range(len(self.arr)):
+            if self.arr[self.uniq_cities.index(city)][i] != 0:
+                connectedcities.append(self.uniq_cities[i])
+        return connectedcities
 
-        steps -= 1 # decreases the count on each iteration of DFS
-        if steps <= 0: # Condition for the final iteration
-            if self.arr[self.uniq_cities.index(initial)][self.uniq_cities.index(final)] != 0: # Checks for exit condition
-                return True
-            else:
-                return False
+    def search(self,edge,initial,final):
+
+        if self.arr[self.uniq_cities.index(edge)][self.uniq_cities.index(final)] != 0: # Checks for exit condition
+            return True
         else: # Condition for all iterations except the final iteration
-            for val in self.vertices[edges].getEdges():
+            for val in self.fetchListconnectedCities(edge):
                 if val != initial: # alternative for the "visited" flag
-                    flag = self.DFS(val, initial, final, steps)
+                    flag = self.search(val,edge,final)
                     if flag and isinstance(flag,bool): # checks if the return value is "True"
                         return str(val)
                     elif isinstance(flag,str): # checks if the return value is a String
                         return str(val) + " > " + flag
 
     def findServiceAvailable(self, city_1, city_2):
-        package_can_be_sent = 'Yes'
+
+        searchresult = self.search(city_1, city_1, city_2)
+
+        if searchresult:
+            package_can_be_sent = "Yes, " + city_1 + " > " + searchresult + " > " + city_2
+        else:
+            package_can_be_sent = "No intermediate language was found."
         f = open("outputPS22.txt", "a")
         f.write("--------Function findServiceAvailable --------")
         f.write("\n")
@@ -276,6 +285,8 @@ def main():
     orfb.showAll()  # outputs all information to the output file
     orfb.populateAdjacencyMatrix() # populates the adjacency matrix.
     orfb.printAdjacencyMatrix()
+    # print(orfb.fetchListconnectedCities('Calcutta'))
+    # print(orfb.search('Calcutta','Calcutta','Mumbai'))
 
     file = open(promptFile, "r")
     prompts = file.readlines()  # store all the prompts into a list
