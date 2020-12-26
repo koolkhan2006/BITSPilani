@@ -250,12 +250,21 @@ class OnlineRailwayFreightBooking:
                     elif isinstance(flag,str): # checks if the return value is a String
                         return str(val) + " > " + flag
 
+    def getDirectTrain(self, city_1, city_2):
+       return self.arr[self.uniq_cities.index(city_1)][self.uniq_cities.index(city_2)]
+
     def findServiceAvailable(self, city_1, city_2):
 
         searchresult = self.search(city_1, city_1, city_2)
+        finalroute  = city_1 + " > " + searchresult + " > " + city_2
+        listdest = finalroute.split(">")
+        finalroutewithTrains = city_1;
+        for i in range(len(listdest)):
+            if i < len(listdest)-1:
+                finalroutewithTrains =  finalroutewithTrains + " > " + self.getDirectTrain(listdest[i].strip(),listdest[i+1].strip()) + " > " + listdest[i+1].strip()
 
         if searchresult:
-            package_can_be_sent = "Yes, " + city_1 + " > " + searchresult + " > " + city_2
+            package_can_be_sent = "Yes, " + finalroutewithTrains
         else:
             package_can_be_sent = "No intermediate language was found."
         f = open("outputPS22.txt", "a")
@@ -284,7 +293,7 @@ def main():
     orfb.readApplications(inFile)  # populates the adjacency matrix.
     orfb.showAll()  # outputs all information to the output file
     orfb.populateAdjacencyMatrix() # populates the adjacency matrix.
-    orfb.printAdjacencyMatrix()
+    #orfb.printAdjacencyMatrix()
     # print(orfb.fetchListconnectedCities('Calcutta'))
     # print(orfb.search('Calcutta','Calcutta','Mumbai'))
 
