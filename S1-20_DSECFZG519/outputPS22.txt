@@ -1,60 +1,55 @@
 --------Function showAll --------
 
-Total no. of freight trains:6
+Total no. of freight trains:5
 Total no. of cities:8
 List of Freight trains:
-T2342
-T1122
-T5623
-T1235
 T2341
-T5768
+T5623
+T2342
+T1235
+T1122
 
 List of cities:
-Hyderabad
-Nagpur
-Ahmedabad
-Mumbai
-Vishakhapatnam
 Calcutta
+Ahmedabad
 New Delhi
+Hyderabad
 Chennai
+Vishakhapatnam
+Mumbai
+Nagpur
 -----------------------------------------
 
 --------Function displayTransportHub --------
 Main transport hub:New Delhi
-Number of trains visited:4
+Number of trains visited:3
 List of Freight trains:
-T2342
-T1122
-T2341
 T1235
+T2342
+T2341
 -----------------------------------------
 
 --------Function displayConnectedCities --------
 Freight train number:T1122
-Number of cities connected:6
+Number of cities connected:3
 List of cities connected directly by T1122:
-Nagpur
 Ahmedabad
 Mumbai
-Calcutta
-New Delhi
-Chennai
+Nagpur
 -----------------------------------------
 
 --------Function displayConnectedCities --------
 Freight train number:T1235
 Number of cities connected:2
 List of cities connected directly by T1235:
-Chennai
 New Delhi
+Chennai
 -----------------------------------------
 
 --------Function displayDirectTrain --------
 City A:Calcutta
 City B:New Delhi
-Package can be sent directly:Yes, Package can be sent through T2342,T1122
+Package can be sent directly:Yes, Package can be sent through T2342
 -----------------------------------------
 
 --------Function displayDirectTrain --------
@@ -66,12 +61,12 @@ Package can be sent directly:No, Apology no direct trains available on this rout
 --------Function findServiceAvailable --------
 City A:Calcutta
 City B:Mumbai
-Package can be sent directly:Yes
+Package can be sent directly:Yes, Calcutta > T2342 > New Delhi > T2341 > Ahmedabad > T1122 > Mumbai
 -----------------------------------------
 
 --------Function findServiceAvailable --------
 City A:Nagpur
 City B:Vishakhapatnam
-Package can be sent directly:Yes
+Package can be sent directly:No intermediate service was found.
 -----------------------------------------
 

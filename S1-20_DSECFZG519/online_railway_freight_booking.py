@@ -238,12 +238,20 @@ class OnlineRailwayFreightBooking:
         return connectedcities
 
     def search(self,edge,initial,final):
-
+        print("edge :" + edge + " initial: " + initial + " final: "+final)
         if self.arr[self.uniq_cities.index(edge)][self.uniq_cities.index(final)] != 0: # Checks for exit condition
             return True
         else: # Condition for all iterations except the final iteration
+            combi = edge + "," + "," + initial + "," + final
+            flagcombi = True
+            try:
+                self.lstdestinationscovered.index(combi)
+            except:
+                flagcombi = False
+
             for val in self.fetchListconnectedCities(edge):
-                if val != initial: # alternative for the "visited" flag
+                if val != initial and not flagcombi: # alternative for the "visited" flag
+                    self.lstdestinationscovered.append(combi)
                     flag = self.search(val,edge,final)
                     if flag and isinstance(flag,bool): # checks if the return value is "True"
                         return str(val)
@@ -254,19 +262,22 @@ class OnlineRailwayFreightBooking:
        return self.arr[self.uniq_cities.index(city_1)][self.uniq_cities.index(city_2)]
 
     def findServiceAvailable(self, city_1, city_2):
-
+        self.lstdestinationscovered = []
         searchresult = self.search(city_1, city_1, city_2)
-        finalroute  = city_1 + " > " + searchresult + " > " + city_2
+        if  isinstance(searchresult, bool) or searchresult == None:  # checks if the return value is "True"
+            finalroute  = city_1 + " > " + city_2;
+        else:
+            finalroute  = city_1 + " > " + searchresult + " > " + city_2
         listdest = finalroute.split(">")
         finalroutewithTrains = city_1;
         for i in range(len(listdest)):
-            if i < len(listdest)-1:
+            if i < len(listdest)-1 and searchresult != None:
                 finalroutewithTrains =  finalroutewithTrains + " > " + self.getDirectTrain(listdest[i].strip(),listdest[i+1].strip()) + " > " + listdest[i+1].strip()
 
-        if searchresult:
+        if searchresult and searchresult != None:
             package_can_be_sent = "Yes, " + finalroutewithTrains
         else:
-            package_can_be_sent = "No intermediate language was found."
+            package_can_be_sent = "No intermediate service was found."
         f = open("outputPS22.txt", "a")
         f.write("--------Function findServiceAvailable --------")
         f.write("\n")
