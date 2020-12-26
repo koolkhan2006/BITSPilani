@@ -210,10 +210,14 @@ class OnlineRailwayFreightBooking:
         Description: Take 2 city as input and find the their respective index and using their
         index checks in adjacency matrix at that specific location whether train is available or not.
         """
-        package_can_be_sent = 'No, Apology no direct trains available on this route'
-        if self.arr[self.uniq_cities.index(city_1)][self.uniq_cities.index(city_2)] != 0:
-            package_can_be_sent = 'Yes, Package can be sent through ' + self.arr[self.uniq_cities.index(city_1)][
-                self.uniq_cities.index(city_2)]
+        try:
+            if self.arr[self.uniq_cities.index(city_1)][self.uniq_cities.index(city_2)] != 0:
+                package_can_be_sent = 'Yes, Package can be sent through ' + self.arr[self.uniq_cities.index(city_1)][self.uniq_cities.index(city_2)]
+            else:
+                package_can_be_sent = 'No, Apology no direct trains available on this route'
+        except ValueError as ve:
+            package_can_be_sent = 'No, Apology no direct trains available on this route'
+
         f = open("outputPS22.txt", "a")
         f.write("--------Function displayDirectTrain --------")
         f.write("\n")
@@ -225,6 +229,23 @@ class OnlineRailwayFreightBooking:
         f.write("-----------------------------------------\n")
         f.write("\n")
         f.close()
+
+    def search(self, edges, initial, final, steps):
+
+        steps -= 1 # decreases the count on each iteration of DFS
+        if steps <= 0: # Condition for the final iteration
+            if self.arr[self.uniq_cities.index(initial)][self.uniq_cities.index(final)] != 0: # Checks for exit condition
+                return True
+            else:
+                return False
+        else: # Condition for all iterations except the final iteration
+            for val in self.vertices[edges].getEdges():
+                if val != initial: # alternative for the "visited" flag
+                    flag = self.DFS(val, initial, final, steps)
+                    if flag and isinstance(flag,bool): # checks if the return value is "True"
+                        return str(val)
+                    elif isinstance(flag,str): # checks if the return value is a String
+                        return str(val) + " > " + flag
 
     def findServiceAvailable(self, city_1, city_2):
         package_can_be_sent = 'Yes'
@@ -254,7 +275,7 @@ def main():
     orfb.readApplications(inFile)  # populates the adjacency matrix.
     orfb.showAll()  # outputs all information to the output file
     orfb.populateAdjacencyMatrix() # populates the adjacency matrix.
-    # orfb.printAdjacencyMatrix()
+    orfb.printAdjacencyMatrix()
 
     file = open(promptFile, "r")
     prompts = file.readlines()  # store all the prompts into a list
