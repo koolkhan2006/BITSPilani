@@ -238,7 +238,7 @@ class OnlineRailwayFreightBooking:
         return connectedcities
 
     def search(self,edge,initial,final):
-        print("edge :" + edge + " initial: " + initial + " final: "+final)
+
         if self.arr[self.uniq_cities.index(edge)][self.uniq_cities.index(final)] != 0: # Checks for exit condition
             return True
         else: # Condition for all iterations except the final iteration
@@ -265,11 +265,11 @@ class OnlineRailwayFreightBooking:
         self.lstdestinationscovered = []
         searchresult = self.search(city_1, city_1, city_2)
         if  isinstance(searchresult, bool) or searchresult == None:  # checks if the return value is "True"
-            finalroute  = city_1 + " > " + city_2;
+            finalroute  = city_1 + " > " + city_2
         else:
             finalroute  = city_1 + " > " + searchresult + " > " + city_2
         listdest = finalroute.split(">")
-        finalroutewithTrains = city_1;
+        finalroutewithTrains = city_1
         for i in range(len(listdest)):
             if i < len(listdest)-1 and searchresult != None:
                 finalroutewithTrains =  finalroutewithTrains + " > " + self.getDirectTrain(listdest[i].strip(),listdest[i+1].strip()) + " > " + listdest[i+1].strip()

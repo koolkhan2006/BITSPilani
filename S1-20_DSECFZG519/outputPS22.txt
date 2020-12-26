@@ -1,49 +1,58 @@
 --------Function showAll --------
 
-Total no. of freight trains:5
-Total no. of cities:8
+Total no. of freight trains:9
+Total no. of cities:12
 List of Freight trains:
-T2341
 T5623
-T2342
-T1235
+T1010
 T1122
+T2341
+T2342
+T9999
+T1235
+T1000
+T7777
 
 List of cities:
-Calcutta
-Ahmedabad
-New Delhi
-Hyderabad
-Chennai
-Vishakhapatnam
-Mumbai
 Nagpur
+Ahmedabad
+Banglore
+Vishakhapatnam
+Surat
+Hyderabad
+KanyaKumari
+Calcutta
+Jabalpur
+Mumbai
+Chennai
+New Delhi
 -----------------------------------------
 
 --------Function displayTransportHub --------
-Main transport hub:New Delhi
-Number of trains visited:3
+Main transport hub:Mumbai
+Number of trains visited:4
 List of Freight trains:
-T1235
-T2342
-T2341
+T7777
+T1000
+T1010
+T1122
 -----------------------------------------
 
 --------Function displayConnectedCities --------
 Freight train number:T1122
 Number of cities connected:3
 List of cities connected directly by T1122:
+Nagpur
 Ahmedabad
 Mumbai
-Nagpur
 -----------------------------------------
 
 --------Function displayConnectedCities --------
 Freight train number:T1235
 Number of cities connected:2
 List of cities connected directly by T1235:
-New Delhi
 Chennai
+New Delhi
 -----------------------------------------
 
 --------Function displayDirectTrain --------
@@ -62,6 +71,12 @@ Package can be sent directly:No, Apology no direct trains available on this rout
 City A:Calcutta
 City B:Mumbai
 Package can be sent directly:Yes, Calcutta > T2342 > New Delhi > T2341 > Ahmedabad > T1122 > Mumbai
+-----------------------------------------
+
+--------Function findServiceAvailable --------
+City A:New Delhi
+City B:Banglore
+Package can be sent directly:Yes, New Delhi > T2341 > Ahmedabad > T1122 > Nagpur > T1122 > Mumbai > T1000 > Banglore
 -----------------------------------------
 
 --------Function findServiceAvailable --------

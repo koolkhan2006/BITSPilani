@@ -4,4 +4,5 @@ searchTrain: T1235
 searchCities: Calcutta: New Delhi
 searchCities: Chennai: Hyderabad
 ServiceAvailability: Calcutta: Mumbai
+ServiceAvailability: New Delhi: Banglore
 ServiceAvailability: Nagpur: Vishakhapatnam
