@@ -1,0 +1,8 @@
+Food Items:6
+Maximum Bag Weight:10
+F1/5/22
+F2/3/50
+F3/8/18
+F4/2/60
+F5/1/35
+F6/2/22
