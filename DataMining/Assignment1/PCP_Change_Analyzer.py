@@ -6,9 +6,9 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import VotingClassifier, BaggingClassifier, RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.feature_selection import RFECV, RFE
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 print("*"*50)
 print("Read Csv file")
@@ -34,6 +34,34 @@ print("Dropping test index as it is just an index column")
 print("*"*50)
 df_original = df_original.drop(['testindex'], axis=1)
 print(df_original.head())
+
+print("*"*50)
+print("Univariate analysis Outcome ")
+print("*"*50)
+sns.distplot(df_original.outcome)
+plt.show()
+
+
+print("*"*50)
+print("Univariate analysis Outcome ")
+print("*"*50)
+sns.distplot(df_original.same_gender)
+plt.show()
+
+sns.countplot(x='outcome', data=df_original)
+plt.title('Number of outcome by kid')
+plt.ylabel('Number of kid')
+plt.xlabel('outcome')
+plt.xticks(rotation = 90)
+plt.show();
+
+print(df_original.distance.describe())
+
+print("*"*50)
+print("Correlation analysis ")
+print("*"*50)
+sns.heatmap(df_original.corr(),annot=True)
+plt.show()
 
 print("*"*50)
 print("Dropping claims_daysaway as most of the columns are empty")
@@ -141,6 +169,8 @@ model1_cv = GridSearchCV(estimator=model1, param_grid=params, cv = 5)
 model1_cv.fit(X,y)
 print(model1_cv.best_score_)
 print(model1_cv.best_params_)
+print (classification_report(y_test,y_pred))
+print(accuracy_score(y_test,y_pred))
 model1= model1_cv.best_estimator_
 print(model1)
 
@@ -192,7 +222,6 @@ print("Using Bagging classifier to get model accuracy on different datasetup")
 print("*"*50)
 bc = BaggingClassifier(base_estimator=model2, random_state=42, oob_score=True, n_estimators=40, max_samples=0.72) #Base estimator has been used as Decision tree
 generate_classfication_report(bc)
-
 bc.fit(X_train,y_train)
 y_pred = bc.predict(X_test)
 print(bc.oob_score_)
